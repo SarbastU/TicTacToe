@@ -1,0 +1,165 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --cell-size: 100px;
+    --mark-size: calc(var(--cell-size) * .8);
+}
+
+.board {
+    display: grid;
+    height: 100vh;
+    width: 100%;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    
+
+}
+
+.cell {
+    display: flex;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border: 1px solid black;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--mark-size);
+    cursor: pointer;
+    
+}
+
+/* X shapes */
+.cell.x::before, .cell.x::after {
+    content: "";
+    position: absolute;
+    width: var(--mark-size);
+    height: calc(var(--mark-size) * .2);
+    background-color: black;
+    border-radius: 50%;
+}
+
+.cell.x::before {
+    transform: rotate(45deg);
+}
+.cell.x::after {
+    transform: rotate(-45deg);
+}
+
+/* O Shape */
+.cell.o::before, .cell.o::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+}
+
+.cell.o::before {
+    width: calc(var(--mark-size) * .8);
+    height: calc(var(--mark-size) * .8);
+    background-color: black;
+}
+
+.cell.o::after {
+    width: calc(var(--mark-size) * .45);
+    height: calc(var(--mark-size) * .45);
+    background-color: white;
+}
+
+/* Not allowed on already used cells */
+.cell.x, .cell.o{
+    cursor: not-allowed;
+}
+
+/* Hover effects */
+.board .cell:not(.x):not(.o):hover {
+    border: .2rem solid lightgreen;
+}
+
+/* menu screen */
+.menu-screen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 5rem;
+    /* align-items: center; */
+    color: white;
+    font-size: 2rem;
+    z-index: 99;
+}
+
+
+
+.menu-screen form { 
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 1.5rem;
+    width: 50%;
+
+}
+
+
+.menu-screen form>*:nth-child(odd){
+    flex: 0 0 55%;
+}
+
+.menu-msg {
+    text-decoration: underline;
+    color: aqua;
+    margin-bottom: 2rem;
+}
+
+.menu-screen form select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-right: 1.5rem;
+    width: auto;
+    color:black;
+    font-size: large;
+    font-weight: bolder;
+    text-align: center;
+    background: white url(/img/darrow.png) no-repeat 95% 50%;
+    background-size: 1.5rem 100%;
+}
+.menu-screen form select:nth-last-of-type(-n+2){
+    width: 8rem;
+    text-align: left;
+}
+
+
+.menu-screen form select:hover {
+    color: white;
+    background-color: black;
+}
+
+.menu-screen form button {
+    font-size: 3rem;
+    color: black;
+    background-color: white;
+    border: .2rem solid black;
+    padding: 0rem 1rem;
+    cursor: pointer;
+    margin-top: 2rem;
+}
+
+.menu-screen form button:hover {
+    color: white;
+    background-color: black;
+    border-color: white;
+}
+.menu-screen.show {
+    display:flex;
+}
+
+
+
